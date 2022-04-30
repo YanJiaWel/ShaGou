@@ -51,8 +51,16 @@ void FramelessWidget::mouseReleaseEvent(QMouseEvent *event)
 void FramelessWidget::mouseDoubleClickEvent(QMouseEvent *event)
 {
     Q_UNUSED(event)
+    if(this->isFullScreen())
+    {
+        this->showNormal();
+    }
+    else
+    {
+        this->showFullScreen();
+    }
+    qDebug() << "----------mouseDoubleClickEvent-------------";
     qDebug() << "is full screen = " << this->isFullScreen();
-    //this->isFullScreen() ? 还原 : 最大化 ;
 }
 void FramelessWidget::mouseMoveEvent(QMouseEvent *event)
 {
@@ -136,7 +144,38 @@ void FramelessWidget::mouseMoveEvent(QMouseEvent *event)
             this->setGeometry(pre_geometry);
             break;
         case LeftBottom:
+            pre_geometry.setLeft(this->m_original_rect.x()+offset_pos.x());
+            pre_geometry.setTop(this->m_original_rect.y());
+            pre_geometry.setWidth(this->m_original_rect.width()-offset_pos.x());
+            pre_geometry.setHeight(this->m_original_rect.height()+offset_pos.y());
+
+            if(this->m_original_rect.width()-offset_pos.x()  < WINDOW_MIN_WIDTH)
+            {
+                pre_geometry.setLeft(this->m_original_rect.x()+this->m_original_rect.width()-WINDOW_MIN_WIDTH);
+                pre_geometry.setWidth(WINDOW_MIN_WIDTH);
+            }
+            if(this->m_original_rect.height()+offset_pos.y() < WINDOW_MIN_HEIGHT)
+            {
+                pre_geometry.setHeight(WINDOW_MIN_HEIGHT);
+            }
+            this->setGeometry(pre_geometry);
+            break;
         case RightTop:
+            pre_geometry.setLeft(this->m_original_rect.x());
+            pre_geometry.setTop(this->m_original_rect.y()+offset_pos.y());
+            pre_geometry.setWidth(this->m_original_rect.width()+offset_pos.x());
+            pre_geometry.setHeight(this->m_original_rect.height()-offset_pos.y());
+
+            if(this->m_original_rect.width()+offset_pos.x()  < WINDOW_MIN_WIDTH)
+            {
+                pre_geometry.setWidth(WINDOW_MIN_WIDTH);
+            }
+            if(this->m_original_rect.height()-offset_pos.y() < WINDOW_MIN_HEIGHT)
+            {
+                pre_geometry.setTop(this->m_original_rect.y()+this->m_original_rect.height()-WINDOW_MIN_HEIGHT);
+                pre_geometry.setHeight(WINDOW_MIN_HEIGHT);
+            }
+            this->setGeometry(pre_geometry);
             break;
         case Default:
         default:
