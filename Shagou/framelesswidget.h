@@ -1,6 +1,8 @@
 #ifndef FRAMELESSWIDGET_H
 #define FRAMELESSWIDGET_H
-
+/*
+无边框窗口，可移动，四个角进行拉伸，双击最大化/还原
+*/
 #include <QWidget>
 #include <QEvent>
 #include <QMouseEvent>

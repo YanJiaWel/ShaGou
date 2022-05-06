@@ -26,9 +26,34 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    framelesswidget.cpp
+    framelesswidget.cpp \
+    titlebar.cpp \
+    mypointslider.cpp \
+    playerbuttom.cpp \
+    myalbumbutton.cpp \
+    mycrolllabel.cpp \
+    myprogress.cpp \
+    middlepart.cpp \
+    musicpart.cpp \
+    musicpart/musicpartleft.cpp \
+    myWidget/mytoolbox.cpp
 
 HEADERS += \
         mainwindow.h \
     framelesswidget.h \
-    common_data.h
+    common_data.h \
+    titlebar.h \
+    style_sheet.h \
+    mypointslider.h \
+    playerbuttom.h \
+    myalbumbutton.h \
+    mycrolllabel.h \
+    myprogress.h \
+    middlepart.h \
+    musicpart.h \
+    musicpart/musicpartleft.h \
+    myWidget/mytoolbox.h
+
+RESOURCES += \
+    res.qrc
+
